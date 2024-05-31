@@ -1,0 +1,15 @@
+body {
+  background-color: #282c34;
+  color: #fff;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+table > tr > th,
+table > tr > td {
+  padding: 10px 25px;
+}
