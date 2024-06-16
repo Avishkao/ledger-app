@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/signup.css";
 
 const SignupForm = () => {
   const [form] = Form.useForm();
@@ -11,6 +12,15 @@ const SignupForm = () => {
   let history = useNavigate();
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [values, setValues] = useState({});
+
+  const validateLengthofPassword = (values) => {
+    if (values.password) {
+      if (values.password.length < 6) errors.password = "weak";
+      else if (values.password.length < 10) errors.password = "Medium";
+      else errors.password = "strong";
+    }
+  };
 
   const validateValues = (values) => {
     let errors = {};
@@ -20,7 +30,8 @@ const SignupForm = () => {
     if (!values.password) {
       errors.password = "password is required.";
     }
-    if (values.password !== values.password2) {
+
+    if (values.password.length > 10 && values.password !== values.password2) {
       errors.password2 = "password and password2 doesnot match!";
     }
 
@@ -30,6 +41,7 @@ const SignupForm = () => {
   };
 
   const onFinish = async (values) => {
+    console.log("values", values);
     validateValues(values);
     if (Object.keys(errors).length > 0) {
       return;
@@ -53,89 +65,77 @@ const SignupForm = () => {
     }
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const handleChange = (e) => {
+    console.log("---->", e.target.name, e.target.value);
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
   };
   const redirectToLoginForm = () => {
     history("/login");
   };
 
-  const layout = {
-    wrapperCol: {
-      span: 16,
-    },
-  };
-
+  console.log("values", values);
   return (
-    <Form
-      {...layout}
-      style={{
-        maxWidth: 600,
-        border: "1px solid grey",
-        borderRadius: 20,
-        padding: 20,
-        margin: "20px auto",
-      }}
-      initialValues={{
-        remember: true,
-        username: "",
-        password: "",
-      }}
-      name="control-hooks"
-      onFinish={onFinish}
-      form={form}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Title>Signup Form</Title>
-      <Form.Item
-        label="Set Username"
-        name="username"
-        hasFeedback={!errors.username}
-      >
-        <Input />
+    <div className="form">
+      <Title className="signuptext">Signup Form</Title>
+      <Form.Item hasFeedback={!errors.username} className="inputField">
+        <Input
+          className="logininput"
+          onChange={handleChange}
+          placeholder="Username"
+          name="username"
+        />
         {errors.username && (
           <Typography.Text type="danger">{errors.username}</Typography.Text>
         )}
       </Form.Item>
 
-      <Form.Item
-        label="Set Password"
-        name="password"
-        hasFeedback={!errors.password}
-      >
-        <Input.Password />
+      <Form.Item hasFeedback={!errors.password} className="inputField">
+        <Input.Password
+          onChange={handleChange}
+          className="logininput"
+          placeholder="Password"
+          name="password"
+        />
         {errors.password && (
           <Typography.Text type="danger">{errors.password}</Typography.Text>
         )}
       </Form.Item>
-      <Form.Item
-        label="Confirm Password"
-        name="password2"
-        hasFeedback={!errors.password2}
-      >
-        <Input.Password />
+      <Form.Item hasFeedback={!errors.password2} className="inputField">
+        <Input.Password
+          onChange={handleChange}
+          className="logininput"
+          placeholder="Confirm Password"
+          name="password2"
+        />
         {console.log("password2", errors.password2)}
         {errors.password2 && (
           <Typography.Text type="danger">{errors.password2}</Typography.Text>
         )}
       </Form.Item>
 
-      <Form.Item
-        wrapperCol={{
-          offset: 4,
-          span: 16,
-        }}
-      >
-        <Button type="primary" htmlType="submit" disabled={loading}>
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="button"
+          onClick={() => onFinish(values)}
+        >
           {loading ? "Signing..." : "Sign up"}
         </Button>
-        <Button type="link" htmlType="button" onClick={redirectToLoginForm}>
+        <Button
+          type="link"
+          htmlType="button"
+          onClick={redirectToLoginForm}
+          className="button-link"
+        >
           Already have an account?
         </Button>
       </Form.Item>
       <ToastContainer />
-    </Form>
+    </div>
   );
 };
 
