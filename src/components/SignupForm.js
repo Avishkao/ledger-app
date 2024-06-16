@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,8 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/signup.css";
 
 const SignupForm = () => {
-  const [form] = Form.useForm();
-  const { Title } = Typography;
   let history = useNavigate();
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -43,7 +41,7 @@ const SignupForm = () => {
   const onFinish = async (values) => {
     console.log("values", values);
     validateValues(values);
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errors)?.length > 0) {
       return;
     } else {
       setLoading(true);
@@ -79,7 +77,11 @@ const SignupForm = () => {
   console.log("values", values);
   return (
     <div className="form">
-      <Title className="signuptext">Signup Form</Title>
+      <div className="title-container">
+        <h1 className="signin-heading">Welcome</h1>
+        <h1 className="signin-heading2"> User</h1>
+      </div>
+      <p className="signin-text">Sign In to continue.</p>
       <Form.Item hasFeedback={!errors.username} className="inputField">
         <Input
           className="logininput"
@@ -88,7 +90,9 @@ const SignupForm = () => {
           name="username"
         />
         {errors.username && (
-          <Typography.Text type="danger">{errors.username}</Typography.Text>
+          <Typography.Text type="danger" className="errors">
+            {errors.username}
+          </Typography.Text>
         )}
       </Form.Item>
 
@@ -100,7 +104,9 @@ const SignupForm = () => {
           name="password"
         />
         {errors.password && (
-          <Typography.Text type="danger">{errors.password}</Typography.Text>
+          <Typography.Text type="danger" className="errors">
+            {errors.password}
+          </Typography.Text>
         )}
       </Form.Item>
       <Form.Item hasFeedback={!errors.password2} className="inputField">
@@ -112,19 +118,21 @@ const SignupForm = () => {
         />
         {console.log("password2", errors.password2)}
         {errors.password2 && (
-          <Typography.Text type="danger">{errors.password2}</Typography.Text>
+          <Typography.Text type="danger" className="errors">
+            {errors.password2}
+          </Typography.Text>
         )}
       </Form.Item>
 
       <Form.Item>
-        <Button
+        <button
           type="primary"
           htmlType="submit"
           className="button"
           onClick={() => onFinish(values)}
         >
           {loading ? "Signing..." : "Sign up"}
-        </Button>
+        </button>
         <Button
           type="link"
           htmlType="button"

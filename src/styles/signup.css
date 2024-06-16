@@ -1,16 +1,36 @@
 body {
-  background-color: #000000;
+  /* background-color: #000000;
+   */
+  background-color: #323232;
 }
-
-.signuptext {
-  background: -webkit-linear-gradient(#0cfaee, #0981f1, #03a2ad);
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 31%;
+}
+.title-container-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 35%;
+}
+.signtext {
+  background: -webkit-linear-gradient(#f57d1f, #0981f1, #f57d1f);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 500%;
   text-align: left;
   margin: 0;
 }
+.signin-text {
+  color: #b0a4a4;
+  margin-top: -15px;
+}
 
+.signin-heading2 {
+  color: #f57d1f;
+}
 .logininput {
   z-index: 999;
   height: 70px;
@@ -21,19 +41,18 @@ body {
   font-size: large;
   margin-top: 3vh;
   /* background-color: #0d0d0d; */
-  box-shadow: #0cfaee 0px 0px 2px, #03a2ad 4px 4px 8px, #0981f1 -4px -4px 8px;
+  background-color: #272626;
+  /* box-shadow: #f57d1f 0px 0px 2px, #f6e9e9 4px 4px 8px, #d65a31 -4px -4px 8px; */
+  border-color: transparent;
   color: whitesmoke;
   caret-color: red;
   font-weight: 500;
   letter-spacing: 0.4px;
 }
 
-.logininput > .input:focus,
-.inputField > input::placeholder {
-  background-color: red;
-}
-.inputField > input::placeholder {
-  color: #908e8e;
+.inputField > input::placeholder,
+.logininput > input::placeholder {
+  color: #828080;
   font-size: 16px;
   font-family: "Poppins", sans-serif;
 }
@@ -42,7 +61,7 @@ body {
   border-radius: 10px;
   border: none;
   outline: none;
-  background: linear-gradient(#0981f1, #03a2ad);
+  background: linear-gradient(#f57d1f, #d65a31);
   transition: 0.25s;
   width: 100%;
   color: white;
@@ -50,15 +69,88 @@ body {
   font-weight: bold;
   margin-top: 10%;
 }
-.button:hover,
-.button:focus {
-  box-shadow: 0 0.5em 0.5em -0.4em #0981f1;
+.button:hover {
+  box-shadow: 0 0.5em 0.5em -0.4em #d65a31;
+  cursor: pointer;
+  background-color: linear-gradient(#f57d1f, #f6e9e9);
   transform: translateY(-0.25em);
+}
+.button-link {
+  color: white;
 }
 .form {
   z-index: 999;
   padding-left: 2rem;
   padding-top: 10%;
   margin: auto;
-  width: 50%;
+  width: 40%;
+}
+.errors {
+  margin-top: 15px;
+}
+.inputField > input:focus,
+.logininput > input:focus {
+  color: black;
+}
+
+@media only screen and (max-width: 768px) {
+  .logininput {
+    height: 50px;
+    margin-top: 0.5vh;
+  }
+  .title-container {
+    width: 42%;
+  }
+  .form {
+    margin: auto;
+    width: 60%;
+  }
+  .inputField > input::placeholder,
+  .logininput > input::placeholder {
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+  }
+  .button {
+    height: 46px;
+    font-size: 16px;
+    margin-top: 5%;
+  }
+  .button-link {
+    font-size: 12px;
+  }
+  .signin-heading,
+  .signin-heading2 {
+    font-size: 28px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .logininput {
+    height: 30px;
+    margin-top: 0.5vh;
+  }
+  .title-container {
+    width: 60%;
+  }
+  .form {
+    margin: auto;
+    width: 70%;
+  }
+  .inputField > input::placeholder,
+  .logininput > input::placeholder {
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .button {
+    height: 40px;
+    font-size: 15px;
+    margin-top: 5%;
+  }
+  .button-link {
+    font-size: 12px;
+  }
+  .signin-heading,
+  .signin-heading2 {
+    font-size: 28px;
+  }
 }

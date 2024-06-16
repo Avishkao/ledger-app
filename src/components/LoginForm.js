@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Typography } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Form, Input, Typography } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/signup.css";
 
 const SignupForm = () => {
-  const { Title } = Typography;
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({});
@@ -48,7 +46,11 @@ const SignupForm = () => {
   console.log("values", values);
   return (
     <div className="form">
-      <Title className="signuptext">Login Form</Title>
+      <div className="title-container-login">
+        <h1 className="signin-heading">Welcome</h1>
+        <h1 className="signin-heading2"> Again!</h1>
+      </div>
+      <p className="signin-text">Login to your account.</p>
       <Form.Item hasFeedback={!errors.username} className="inputField">
         <Input
           className="logininput"
@@ -68,14 +70,14 @@ const SignupForm = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button
+        <button
           type="primary"
           htmlType="submit"
           className="button"
           onClick={() => onFinish(values)}
         >
           {loading ? "loging..." : "Login"}
-        </Button>
+        </button>
       </Form.Item>
       <ToastContainer />
     </div>
